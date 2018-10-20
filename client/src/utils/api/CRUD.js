@@ -33,6 +33,6 @@ export default class CRUD {
   }
 
   delete(route, data) {
-    return axios.delete(`/api/delete/${route}`, { data }, this.setOptions());
+    return axios.delete(route, { data }, this.setOptions());
   }
 }
