@@ -2,7 +2,7 @@ require('dotenv').config();
 const path = require('path');
 const bodyParser = require('body-parser');
 const express = require('express');
-const routes = require('./routes/api-routes');
+// const routes = require('./routes/routes');
 const passport = require('passport');
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -15,7 +15,7 @@ app.use(passport.session());
 // require('./util/passport')(passport);
 
 // connects all routes
-app.use(routes);
+// app.use(routes);
 
 // serves bundled react files in prod
 app.get('/*', function(req, res) {
