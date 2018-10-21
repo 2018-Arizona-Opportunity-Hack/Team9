@@ -16,35 +16,46 @@ import {
   Visibility
 } from 'semantic-ui-react';
 
-const HomepageHeading = ({ mobile }) => (
-  <Container text>
-    <Header
-      as="h1"
-      content="Children Cancer Network"
-      inverted
-      style={{
-        fontSize: mobile ? '2em' : '4em',
-        fontWeight: 'normal',
-        marginBottom: 0,
-        marginTop: mobile ? '1.5em' : '3em'
-      }}
-    />
-    <Header
-      as="h2"
-      content="Customized Notification Service"
-      inverted
-      style={{
-        fontSize: mobile ? '1.5em' : '1.7em',
-        fontWeight: 'normal',
-        marginTop: mobile ? '0.5em' : '1.5em'
-      }}
-    />
-    <Button primary size="huge">
-      Upload Here
-      <Icon name="right arrow" />
-    </Button>
-  </Container>
-);
+class HomepageHeading extends Component {
+  state = { selectedFile: null };
+
+  uploadFile = event => {
+    this.setState({
+      selectedFile: event.target.files[0]
+    });
+  };
+
+  render() {
+    const { mobile } = this.props;
+    console.log(this.state);
+    return (
+      <Container text>
+        <Header
+          as="h1"
+          content="Children Cancer Network"
+          inverted
+          style={{
+            fontSize: mobile ? '2em' : '4em',
+            fontWeight: 'normal',
+            marginBottom: 0,
+            marginTop: mobile ? '1.5em' : '3em'
+          }}
+        />
+        <Header
+          as="h2"
+          content="Customized Notification Service"
+          inverted
+          style={{
+            fontSize: mobile ? '1.5em' : '1.7em',
+            fontWeight: 'normal',
+            marginTop: mobile ? '0.5em' : '1.5em'
+          }}
+        />
+        <input type="file" id="csv" name="csv" accept=".csv" onChange={this.uploadFile} />
+      </Container>
+    );
+  }
+}
 
 HomepageHeading.propTypes = {
   mobile: PropTypes.bool
