@@ -15,21 +15,11 @@ import {
   Form,
   TextArea
 } from 'semantic-ui-react';
-import { Link } from 'react-router-dom';
-
+import axios from 'axios';
 
 class HomepageHeading extends Component {
-  state = { selectedFile: null };
-
-  uploadFile = event => {
-    this.setState({
-      selectedFile: event.target.files[0]
-    });
-  };
-
   render() {
-    const { mobile } = this.props;
-    console.log(this.state);
+    const { mobile, fileUpload } = this.props;
     return (
       <Container text>
         <Header
@@ -53,7 +43,7 @@ class HomepageHeading extends Component {
             marginTop: mobile ? '0.5em' : '1.5em'
           }}
         />
-        <input type="file" id="csv" name="csv" accept=".csv" onChange={this.uploadFile} />
+        <input type="file" id="csv" name="csv" accept=".csv" onChange={fileUpload} />
       </Container>
     );
   }
@@ -116,7 +106,7 @@ class DesktopContainer extends Component {
                 </Menu.Item>
               </Container>
             </Menu>
-            <HomepageHeading />
+            <HomepageHeading fileUpload={this.props.fileUpload} />
           </Segment>
         </Visibility>
 
@@ -187,10 +177,10 @@ MobileContainer.propTypes = {
   children: PropTypes.node
 };
 
-const ResponsiveContainer = ({ children }) => (
+const ResponsiveContainer = ({ children, fileUpload }) => (
   <div>
-    <DesktopContainer>{children}</DesktopContainer>
-    <MobileContainer>{children}</MobileContainer>
+    <DesktopContainer fileUpload={fileUpload}>{children}</DesktopContainer>
+    <MobileContainer fileUpload={fileUpload}>{children}</MobileContainer>
   </div>
 );
 
@@ -202,9 +192,18 @@ class HomepageLayout extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      message: ''
+      message: '',
+      selectedFile: null,
+      error: false
     };
   }
+
+  uploadFile = event => {
+    console.log('event', event);
+    this.setState({
+      selectedFile: event.target.files[0]
+    });
+  };
 
   handleChange = event => {
     const { name, value } = event.target;
@@ -213,10 +212,27 @@ class HomepageLayout extends Component {
     });
   };
 
+  submitData = () => {
+    if (!this.state.message || !this.state.selectedFile) {
+      this.setState({ error: 'Message and file are both required' });
+      return;
+    }
+    const formData = { message: this.state.message, file: this.state.selectedFile };
+    console.log(formData);
+    axios
+      .post('/send/message', formData, { headers: { 'Content-Type': 'multipart/form-data' } })
+      .then(res => {
+        console.log(res);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+
   render() {
     console.log(this.state);
     return (
-      <ResponsiveContainer>
+      <ResponsiveContainer fileUpload={this.uploadFile}>
         <Segment style={{ padding: '8em 0em' }} vertical>
           <Grid container stackable verticalAlign="middle">
             <Grid.Row>
@@ -235,7 +251,10 @@ class HomepageLayout extends Component {
             </Grid.Row>
             <Grid.Row>
               <Grid.Column textAlign="center">
-                <Button size="huge">Submit</Button>
+                <Button size="huge" onClick={this.submitData}>
+                  Submit
+                </Button>
+                {this.state.error && <p style={{ color: 'red' }}>{this.state.error}</p>}
               </Grid.Column>
             </Grid.Row>
           </Grid>
