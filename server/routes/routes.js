@@ -1,7 +1,8 @@
 'use strict';
-let express = require('express');
-let router = express.Router();
-let userController = require('../controllers/userController.js');
+const express = require('express');
+const router = express.Router();
+const userController = require('../controllers/userController.js');
+const multer = require('multer');
 const jwt = require('jsonwebtoken');
 
 router.post('/create/admin', (req, res, next) => {
@@ -48,6 +49,15 @@ router.post('/authenticate/admin', (req, res, next) => {
       }
     });
   }
+});
+
+router.post('/send/message', (req, res, next) => {
+  console.log(req.body);
+  // if (!req.body.message || !req.body.file) {
+  //   res.status(400).send();
+  // } else {
+  //   res.send(req);
+  // }
 });
 
 module.exports = router;
