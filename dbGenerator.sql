@@ -138,3 +138,15 @@ WHERE ID = 9;
 
 UPDATE RESPONSES SET MSG_ID = 'FOOadh23874583ks', EVENT = 'Breast Cancer Event'
 WHERE ID = 10;
+
+INSERT INTO SERVERMSGS(CONTACT_ID, TEXTBODY, E_DTAE, MSG_ID, EVENT) VALUES('jsmith1985@gmail.com', 'Can you come to the hospital Thursday 2/23/2018 at 1:00pm? RSVP at http://forms.google.com/form2344', '2018-2-21', 'SFngjhk245sf', 'Breast Cancer Event');
+INSERT INTO SERVERMSGS(CONTACT_ID, TEXTBODY, E_DTAE, MSG_ID, EVENT) VALUES('jsmith1985@gmail.com', 'Can you come to the hospital Monday 5/20/2018 at 4:30pm? RSVP at http://forms.google.com/form23345', '2018-3-8', 'Dtgj3948jdkf', 'Breast Cancer Event');
+INSERT INTO SERVERMSGS(CONTACT_ID, TEXTBODY, E_DTAE, MSG_ID, EVENT) VALUES('jsmith1985@gmail.com', 'Would you like to schedule appointment for next week? RSVP at http://forms.google.com/form4564', '2017-5-8', 'DishgF34878734nmv', 'Children Hospital Event');
+INSERT INTO SERVERMSGS(CONTACT_ID, TEXTBODY, E_DTAE, MSG_ID, EVENT) VALUES('p.forlife@yahoo.com', 'Can you come to the hospital Friday 2/20/2018 at 1:00pm? RSVP at http://forms.google.com/form2567', '2016-2-11', 'NshofFjh2487fcbg', 'Children Hospital Event');
+INSERT INTO SERVERMSGS(CONTACT_ID, TEXTBODY, E_DTAE, MSG_ID, EVENT) VALUES('mbritan@gmail.com', 'Would you like to schedule appointment for next week? RSVP at http://forms.google.com/form234564', '2018-8-8', 'Flasjf3847dmhg', 'Breast Cancer Event');
+INSERT INTO SERVERMSGS(CONTACT_ID, TEXTBODY, E_DTAE, MSG_ID, EVENT) VALUES('mbritan@gmail.com', 'Can you come to the hospital Thursday 2/23/2018 at 1:00pm? RSVP at http://forms.google.com/form2334244', '2016-8-8', 'SFjhn3598SDjgn', 'Breast Cancer Event');
+INSERT INTO SERVERMSGS(CONTACT_ID, TEXTBODY, E_DTAE, MSG_ID, EVENT) VALUES('mbritan@gmail.com', 'Would you like to schedule appointment for next week? RSVP at http://forms.google.com/form2344', '2013-12-8', 'BFHDwf8247djfjk', 'Children Hospital Event');
+INSERT INTO SERVERMSGS(CONTACT_ID, TEXTBODY, E_DTAE, MSG_ID, EVENT) VALUES('elbash@gmail.com', 'Can you come to the hospital Thursday 2/12/2018 at 1:00pm? RSVP at http://forms.google.com/form2344', '2015-3-8', 'Mosh384792nv', 'Children Hospital Event');
+INSERT INTO SERVERMSGS(CONTACT_ID, TEXTBODY, E_DTAE, MSG_ID, EVENT) VALUES('elbash@gmail.com', 'Can you come to the hospital Friday 3/11/2018 at 1:00pm? RSVP at http://forms.google.com/form2344', '2017-6-7', 'Vashf835kdn432', 'Breast Cancer Event');
+INSERT INTO SERVERMSGS(CONTACT_ID, TEXTBODY, E_DTAE, MSG_ID, EVENT) VALUES('rezavrfan@hotmail.com', 'Would you like to schedule appointment for next week? RSVP at http://forms.google.com/form2344', '2015-11-11', 'Fdbjs9858723las', 'Breast Cancer Event');
+INSERT INTO SERVERMSGS(CONTACT_ID, TEXTBODY, E_DTAE, MSG_ID, EVENT) VALUES('rezavrfan@hotmail.com', 'Would you like to schedule appointment for next week? RSVP at http://forms.google.com/form2344', '2016-3-8', 'SFjf83848df', 'Children Hospital Event');
