@@ -1,8 +1,6 @@
 const bcrypt = require('bcrypt');
 const db = require('../config/config');
 
-var apiResult = {};
-
 var user = {
   createUser: function(payload, callback) {
     bcrypt.genSalt(10, function(err, salt) {
@@ -34,33 +32,38 @@ var user = {
     db.query(sql, [payload.username], function(err, results) {
       if (err) callback(err);
 
-      bcrypt.compare(payload.password, results[0].password, function(err, res) {
-        // res == true
-        if (err) callback(err);
-        callback(false, results[0]);
-      });
-    });
-  },
-
-  removeUser: function(req, res) {
-    var sql = 'DELETE FROM users WHERE username = ? ';
-
-    db.query(sql, [req.body.username], function(err, result) {
-      if (error) {
-        console.log('');
+      if (!results.length) {
+        callback({ message: 'User not found', status: 404 });
+        return;
+      } else {
+        bcrypt.compare(payload.password, results[0].password, function(err, res) {
+          if (err) callback(err);
+          else if (!res) callback({ message: 'Username or password is incorrect', status: 404 });
+          else {
+            callback(false, results[0]);
+          }
+        });
       }
-      apiResult.data = { result: 'true' };
-      res.json(apiResult);
     });
   },
 
-  changePassword: function(req, res) {
+  // removeUser: function(payload, callback) {
+  //   var sql = 'DELETE FROM users WHERE username = ? ';
+
+  //   db.query(sql, [req.body.username], function(err, result) {
+  //     apiResult.data = { result: 'true' };
+  //     res.json(apiResult);
+  //   });
+  // },
+
+  changePassword: function(payload, callback) {
     var sql = 'UPDATE users SET password = ? ';
 
-    bcrypt.hash(req.body.password, saltRounds, function(err, hash) {
+    bcrypt.hash(payload, saltRounds, function(err, hash) {
       db.query(sql, [hash], function(err, result) {
-        if (!err) {
-          res.json(apiResult);
+        if (err) callback(err, 500);
+        else {
+          callback(false, result);
         }
       });
     });
