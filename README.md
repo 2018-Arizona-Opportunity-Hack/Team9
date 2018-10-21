@@ -25,6 +25,7 @@ That will start the http://localhost:3000
 
 ## Tools used:
 1 - NodeJs for server development.
+```
 2 - React Js for UI/Frontend development.
 3 - MySql Database for backend datasource.
 4 - Twillio for sms services.
