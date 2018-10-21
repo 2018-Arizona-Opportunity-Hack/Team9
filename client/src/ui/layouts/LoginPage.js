@@ -1,6 +1,5 @@
 import React from 'react';
 import { Button, Form, Grid, Header, Message, Segment } from 'semantic-ui-react';
-import { Route, Redirect } from 'react-router-dom';
 import axios from 'axios';
 
 class LoginForm extends React.Component {
@@ -21,6 +20,7 @@ class LoginForm extends React.Component {
         password: this.state.password
       })
       .then(function(response) {
+        sessionStorage.setItem('token', response.data.token);
         that.props.history.push({
           pathname: '/home',
           state: { auth: true }
