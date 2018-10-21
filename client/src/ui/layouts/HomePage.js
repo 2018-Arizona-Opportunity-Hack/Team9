@@ -15,6 +15,8 @@ import {
   Form,
   TextArea
 } from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
+
 
 class HomepageHeading extends Component {
   state = { selectedFile: null };
@@ -102,7 +104,13 @@ class DesktopContainer extends Component {
                       Website
                     </a>
                   </Button>
-                  <Button as="a" inverted={!fixed} primary={fixed} style={{ marginLeft: '0.5em' }}>
+                  <Button
+                    as="a"
+                    inverted={!fixed}
+                    primary={fixed}
+                    style={{ marginLeft: '0.5em' }}
+                    onClick={this.handleClick}
+                  >
                     Log Out
                   </Button>
                 </Menu.Item>
@@ -190,67 +198,93 @@ ResponsiveContainer.propTypes = {
   children: PropTypes.node
 };
 
-const HomepageLayout = () => (
-  <ResponsiveContainer>
-    <Segment style={{ padding: '8em 0em' }} vertical>
-      <Grid container stackable verticalAlign="middle">
-        <Grid.Row>
-          <Grid.Column floated="right">
-            <Form>
-              <TextArea
-                autoHeight
-                placeholder="Try adding multiple lines"
-                style={{ minHeight: 100 }}
-              />
-            </Form>
-          </Grid.Column>
-        </Grid.Row>
-        <Grid.Row>
-          <Grid.Column textAlign="center">
-            <Button size="huge">Submit</Button>
-          </Grid.Column>
-        </Grid.Row>
-      </Grid>
-    </Segment>
+class HomepageLayout extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      message: ''
+    };
+  }
 
-    <Segment inverted vertical style={{ padding: '5em 0em' }}>
-      <Container>
-        <Grid divided inverted stackable>
-          <Grid.Row>
-            <Grid.Column width={3}>
-              <Header inverted as="h4" content="About" />
-              <List link inverted>
-                <List.Item>
-                  <a href="https://www.childrenscancernetwork.org/" target="_blank">
-                    Website
-                  </a>
-                </List.Item>
-                <List.Item>
-                  <a href="https://www.salesforce.com/" target="_blank">
-                    Salesforce
-                  </a>
-                </List.Item>
-                <List.Item>
-                  <a href="https://github.com/2018-Arizona-Opportunity-Hack/Team9" target="_blank">
-                    Work Source
-                  </a>
-                </List.Item>
-              </List>
-            </Grid.Column>
-            <Grid.Column width={3}>
-              <Header inverted as="h4" content="Services" />
-              <List link inverted>
-                <List.Item as="">Trevor</List.Item>
-                <List.Item as="">Sepideh</List.Item>
-                <List.Item as="">Mohammad</List.Item>
-                <List.Item as="">Badri</List.Item>
-                <List.Item as="">Jonnathan</List.Item>
-              </List>
-            </Grid.Column>
-          </Grid.Row>
-        </Grid>
-      </Container>
-    </Segment>
-  </ResponsiveContainer>
-);
+  handleChange = event => {
+    const { name, value } = event.target;
+    this.setState({
+      [name]: value
+    });
+  };
+
+  render() {
+    console.log(this.state);
+    return (
+      <ResponsiveContainer>
+        <Segment style={{ padding: '8em 0em' }} vertical>
+          <Grid container stackable verticalAlign="middle">
+            <Grid.Row>
+              <Grid.Column floated="right">
+                <Form>
+                  <TextArea
+                    autoHeight
+                    placeholder="Try adding multiple lines"
+                    style={{ minHeight: 100 }}
+                    name="message"
+                    onChange={this.handleChange}
+                    value={this.state.message}
+                  />
+                </Form>
+              </Grid.Column>
+            </Grid.Row>
+            <Grid.Row>
+              <Grid.Column textAlign="center">
+                <Button size="huge">Submit</Button>
+              </Grid.Column>
+            </Grid.Row>
+          </Grid>
+        </Segment>
+
+        <Segment inverted vertical style={{ padding: '5em 0em' }}>
+          <Container>
+            <Grid divided inverted stackable>
+              <Grid.Row>
+                <Grid.Column width={3}>
+                  <Header inverted as="h4" content="About" />
+                  <List link inverted>
+                    <List.Item>
+                      <a href="https://www.childrenscancernetwork.org/" target="_blank">
+                        Website
+                      </a>
+                    </List.Item>
+                    <List.Item>
+                      <a href="https://www.salesforce.com/" target="_blank">
+                        Salesforce
+                      </a>
+                    </List.Item>
+                    <List.Item>
+                      <a
+                        href="https://github.com/2018-Arizona-Opportunity-Hack/Team9"
+                        target="_blank"
+                      >
+                        Work Source
+                      </a>
+                    </List.Item>
+                  </List>
+                </Grid.Column>
+                <Grid.Column width={3}>
+                  <Header inverted as="h4" content="Services" />
+                  <List link inverted>
+                    <List.Item as="">Trevor</List.Item>
+                    <List.Item as="">Sepideh</List.Item>
+                    <List.Item as="">Mohammad</List.Item>
+                    <List.Item as="">Badri</List.Item>
+                    <List.Item as="">Jonnathan</List.Item>
+                  </List>
+                </Grid.Column>
+              </Grid.Row>
+            </Grid>
+          </Container>
+        </Segment>
+      </ResponsiveContainer>
+    );
+  }
+}
+
 export default HomepageLayout;
