@@ -21,3 +21,9 @@ This project is a messaging tool that will allow the admin to communicate with a
 ```
  yarn start
 ```
+
+## Tools used:
+1 - NodeJs for server development
+2 - React Js for UI/Frontend development
+3 - MySql Database for backend datasource
+4 - Twillio for sms services.
