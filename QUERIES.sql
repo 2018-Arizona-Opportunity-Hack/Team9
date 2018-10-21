@@ -10,3 +10,6 @@ WHERE C.NAME = 'Young Adults';
 SELECT U.NAME , P.PREF1, P.PREF2, P.PREF3
 FROM CONTACTS U, PREFRENCES P
 WHERE U.EMAIL = 'jsmith1985@gmail.com' AND P.CONTACT_ID = 'jsmith1985@gmail.com';
+
+-- Getting user Responses
+SELECT U.NAME
