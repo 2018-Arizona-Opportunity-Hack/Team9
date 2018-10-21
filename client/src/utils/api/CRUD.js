@@ -3,7 +3,7 @@ import axios from 'axios';
 export default class CRUD {
   constructor() {
     this.wait = 15000;
-    this.timeout = { timeout: wait };
+    this.timeout = { timeout: this.wait };
   }
 
   setOptions() {
