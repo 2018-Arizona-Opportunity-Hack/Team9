@@ -217,10 +217,11 @@ class HomepageLayout extends Component {
       this.setState({ error: 'Message and file are both required' });
       return;
     }
-    const formData = { message: this.state.message, file: this.state.selectedFile };
+    const formData = new FormData();
+    formData.append('file', new Blob([this.state.selectedFile]));
     console.log(formData);
     axios
-      .post('/send/message', formData, { headers: { 'Content-Type': 'multipart/form-data' } })
+      .post('/send/message', formData)
       .then(res => {
         console.log(res);
       })
