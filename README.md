@@ -34,3 +34,15 @@ That will start the http://localhost:3000
 
 ## Database ER Diagrm:
 ![Alt text](/Documentation/DatabaseERD.png?raw=true "Optional Title")
+
+
+## Team members:
+1 - Mohammed Albasha
+
+2 - Trevor Johnson
+
+3 - Sepideh Falah
+
+4 - Jonathan Martinez
+
+5 - Djedid Badri
