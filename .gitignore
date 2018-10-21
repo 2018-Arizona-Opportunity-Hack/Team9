@@ -25,3 +25,5 @@ yarn-error.log*
 
 # local files
 .idea/
+.env
+yarn.lock
