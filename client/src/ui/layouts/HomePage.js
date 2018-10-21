@@ -3,11 +3,9 @@ import React, { Component } from 'react';
 import {
   Button,
   Container,
-  Divider,
   Grid,
   Header,
   Icon,
-  Image,
   List,
   Menu,
   Responsive,
@@ -18,6 +16,7 @@ import {
   TextArea
 } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
+
 
 class HomepageHeading extends Component {
   state = { selectedFile: null };
@@ -170,11 +169,7 @@ class MobileContainer extends Component {
                   <Menu.Item onClick={this.handleToggle}>
                     <Icon name="sidebar" />
                   </Menu.Item>
-                  <Menu.Item position="right">
-                    {/* <Button as="a" inverted style={{ marginLeft: '0.5em' }}>
-                      Log Out
-                    </Button> */}
-                  </Menu.Item>
+                  <Menu.Item position="right" />
                 </Menu>
               </Container>
               <HomepageHeading mobile />
@@ -291,4 +286,5 @@ class HomepageLayout extends Component {
     );
   }
 }
+
 export default HomepageLayout;
