@@ -1,6 +1,6 @@
 import React from 'react';
-import { Button, Form, Grid, Header, Image, Message, Segment } from 'semantic-ui-react';
-
+import { Button, Form, Grid, Header, Message, Segment } from 'semantic-ui-react';
+import { Route, Redirect } from 'react-router-dom';
 import axios from 'axios';
 
 class LoginForm extends React.Component {
@@ -8,36 +8,42 @@ class LoginForm extends React.Component {
     super(props);
     this.state = {
       username: '',
-      password: ''
+      password: '',
+      error: null
     };
-    this.handleClick = this.handleClick.bind(this);
-    this.handleChange = this.handleChange.bind(this);
   }
 
-  handleClick() {
+  handleClick = () => {
+    const that = this;
     axios
       .post(`/authenticate/admin`, {
         username: this.state.username,
         password: this.state.password
       })
       .then(function(response) {
-        console.log(response);
+        that.props.history.push({
+          pathname: '/home',
+          state: { auth: true }
+        });
       })
-      .catch(err => {
-        console.log(err);
+      .catch(error => {
+        console.log('ERR', error);
+        if (error.response && (error.response.status === 404 || error.response.status === 400)) {
+          this.setState({ error: 'Username or password is incorrect' });
+        } else {
+          this.setState({ error: 'An error has occured' });
+        }
       });
-  }
+  };
 
-  handleChange(event) {
+  handleChange = event => {
     const { name, value } = event.target;
     this.setState({
       [name]: value
     });
-  }
+  };
 
   render() {
-    console.log(this.state);
-
     return (
       <div className="login-form">
         <style>{`
@@ -50,7 +56,7 @@ class LoginForm extends React.Component {
         <Grid textAlign="center" style={{ height: '100%' }} verticalAlign="middle">
           <Grid.Column style={{ maxWidth: 450 }}>
             <Header as="h2" color="teal" textAlign="center">
-              <Image src="/logo.png" /> Log-in to your account
+              <Message>Welcome</Message>
             </Header>
             <Form size="large">
               <Segment stacked>
@@ -75,14 +81,12 @@ class LoginForm extends React.Component {
                   onChange={this.handleChange}
                 />
 
-                <Button color="teal" fluid size="large" onClick={e => this.handleClick(e)}>
+                <Button color="teal" fluid size="large" onClick={this.handleClick}>
                   Login
                 </Button>
+                {this.state.error && <p style={{ color: 'red' }}>{this.state.error}</p>}
               </Segment>
             </Form>
-            <Message>
-              New to us? <a href="#">Sign Up</a>
-            </Message>
           </Grid.Column>
         </Grid>
       </div>
