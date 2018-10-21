@@ -38,7 +38,11 @@ That will start the http://localhost:3000
 
 ## Team members:
 1 - Mohammed Albasha
+
 2 - Trevor Johnson
+
 3 - Sepideh Falah
+
 4 - Jonathan Martinez
+
 5 - Djedid Badri
