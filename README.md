@@ -1,4 +1,4 @@
-# Customized Notification Project
+# Customized Notification Text Services Project
 
 ## Description:
 This project is a messaging tool that will allow the admin to communicate with a group of clients. The admin can send sms text and recieve responses from clients. All the sent and recieved texts will be stored in a database that communicates with the nodeJS server. Also the admin can group specific type of the stored contacts and select any to communicate with. The clients can always replay to change their communication preferences.
