@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import LoginPage from "./ui/layouts/LoginPage";
-// import {ProfilePageLayout} from './pages/ProfilePage';
+import HomePage from './ui/layouts/HomePage';
 // import { BrowserRouter as Router, Route } from "react-router-dom";
 
 class App extends Component {
   render() {
-    return <LoginPage/>;
+    return <HomePage/>
+    // <LoginPage/>;
   }
 }
 
