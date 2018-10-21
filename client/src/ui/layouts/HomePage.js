@@ -15,7 +15,10 @@ import {
   Form,
   TextArea
 } from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
+import MyComponent from '../components/MyComponent';
 import axios from 'axios';
+
 
 class HomepageHeading extends Component {
   render() {
@@ -43,7 +46,13 @@ class HomepageHeading extends Component {
             marginTop: mobile ? '0.5em' : '1.5em'
           }}
         />
-        <input type="file" id="csv" name="csv" accept=".csv" onChange={fileUpload} />
+
+        <Button animated="fade">
+          <Button.Content visible>Please Upload Your File Here</Button.Content>
+          <Button.Content hidden>
+            <input type="file" id="csv" name="csv" accept=".csv" onChange={this.uploadFile} />
+          </Button.Content>
+        </Button>
       </Container>
     );
   }
@@ -55,6 +64,10 @@ HomepageHeading.propTypes = {
 
 class DesktopContainer extends Component {
   state = {};
+
+  logout = () => {
+    sessionStorage.clear();
+  };
 
   hideFixedMenu = () => this.setState({ fixed: false });
   showFixedMenu = () => this.setState({ fixed: true });
@@ -99,9 +112,9 @@ class DesktopContainer extends Component {
                     inverted={!fixed}
                     primary={fixed}
                     style={{ marginLeft: '0.5em' }}
-                    onClick={this.handleClick}
+                    onClick={this.logout}
                   >
-                    Log Out
+                    <Link to={{ location: '/', state: { auth: false } }}>Log Out</Link>
                   </Button>
                 </Menu.Item>
               </Container>
@@ -177,12 +190,16 @@ MobileContainer.propTypes = {
   children: PropTypes.node
 };
 
-const ResponsiveContainer = ({ children, fileUpload }) => (
-  <div>
-    <DesktopContainer fileUpload={fileUpload}>{children}</DesktopContainer>
-    <MobileContainer fileUpload={fileUpload}>{children}</MobileContainer>
-  </div>
-);
+
+const ResponsiveContainer = ({ children, fileUpload }) => {
+  return (
+    <div>
+      <DesktopContainer fileUpload={fileUpload}>{children}</DesktopContainer>
+      <MobileContainer fileUpload={fileUpload}>{children}</MobileContainer>
+    </div>
+  );
+};
+
 
 ResponsiveContainer.propTypes = {
   children: PropTypes.node
@@ -232,10 +249,15 @@ class HomepageLayout extends Component {
 
   render() {
     console.log(this.state);
+    console.log(this.props);
     return (
+
       <ResponsiveContainer fileUpload={this.uploadFile}>
         <Segment style={{ padding: '8em 0em' }} vertical>
           <Grid container stackable verticalAlign="middle">
+            <Grid.Row>
+              <MyComponent />
+            </Grid.Row>
             <Grid.Row>
               <Grid.Column floated="right">
                 <Form>
