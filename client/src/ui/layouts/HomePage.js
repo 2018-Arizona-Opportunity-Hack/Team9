@@ -14,9 +14,10 @@ import {
   Segment,
   Sidebar,
   Visibility,
-  Form, TextArea
+  Form,
+  TextArea
 } from 'semantic-ui-react';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const HomepageHeading = ({ mobile }) => (
   <Container text>
@@ -83,15 +84,23 @@ class DesktopContainer extends Component {
               size="large"
             >
               <Container>
-                <Menu.Item as="a"></Menu.Item>
-                <Menu.Item as="a"></Menu.Item>
-                <Menu.Item as="a"></Menu.Item>
-                <Menu.Item as="a"></Menu.Item>
+                <Menu.Item as="a" />
+                <Menu.Item as="a" />
+                <Menu.Item as="a" />
+                <Menu.Item as="a" />
                 <Menu.Item position="right">
-                  <Button  inverted style={{ marginLeft: '0.5em' }}>
-                  <a href="https://www.childrenscancernetwork.org/" target="_blank">Website</a>
+                  <Button inverted style={{ marginLeft: '0.5em' }}>
+                    <a href="https://www.childrenscancernetwork.org/" target="_blank">
+                      Website
+                    </a>
                   </Button>
-                  <Button as="a" inverted={!fixed} primary={fixed} style={{ marginLeft: '0.5em' }}>
+                  <Button
+                    as="a"
+                    inverted={!fixed}
+                    primary={fixed}
+                    style={{ marginLeft: '0.5em' }}
+                    onClick={this.handleClick}
+                  >
                     Log Out
                   </Button>
                 </Menu.Item>
@@ -130,8 +139,7 @@ class MobileContainer extends Component {
       <Responsive maxWidth={Responsive.onlyMobile.maxWidth}>
         <Sidebar.Pushable>
           <Sidebar as={Menu} animation="uncover" inverted vertical visible={sidebarOpened}>
-            <Menu.Item as="a" active>
-            </Menu.Item>
+            <Menu.Item as="a" active />
             <Menu.Item as="a">Log Out</Menu.Item>
           </Sidebar>
 
@@ -184,70 +192,92 @@ ResponsiveContainer.propTypes = {
   children: PropTypes.node
 };
 
-const HomepageLayout = () => (
-  <ResponsiveContainer>
-    <Segment style={{ padding: '8em 0em' }} vertical>
-      <Grid container stackable verticalAlign="middle">
-        <Grid.Row>
-          {/* <Grid.Column width={8}>
-            <Header as="h3" style={{ fontSize: '2em' }}>
-              We Help Companies and Companions
-            </Header>
-            <p style={{ fontSize: '1.33em' }}>
-              We can give your company superpowers to do things that they never thought possible.
-              Let us delight your customers and empower your needs... through pure data analytics.
-            </p>
-            <Header as="h3" style={{ fontSize: '2em' }}>
-              We Make Bananas That Can Dance
-            </Header>
-            <p style={{ fontSize: '1.33em' }}>
-              Yes that's right, you thought it was the stuff of dreams, but even bananas can be
-              bioengineered.
-            </p>
-          </Grid.Column> */}
-          <Grid.Column floated="right">
-            <Form>
-              <TextArea autoHeight placeholder='Try adding multiple lines' style={{ minHeight: 100 }} />
-            </Form>
-          </Grid.Column>
-        </Grid.Row>
-        <Grid.Row>
-          <Grid.Column textAlign="center">
-            <Button size="huge">Submit</Button>
-          </Grid.Column>
-        </Grid.Row>
-      </Grid>
-    </Segment>
- 
- 
-    <Segment inverted vertical style={{ padding: '5em 0em' }}>
-      <Container>
-        <Grid divided inverted stackable>
-          <Grid.Row>
-            <Grid.Column width={3}>
-              <Header inverted as="h4" content="About" />
-              <List link inverted>
-                <List.Item ><a href="https://www.childrenscancernetwork.org/" target="_blank">Website</a></List.Item>
-                <List.Item ><a href="https://www.salesforce.com/" target="_blank">Salesforce</a></List.Item>             
-                <List.Item ><a href="https://github.com/2018-Arizona-Opportunity-Hack/Team9" target="_blank">Work Source</a></List.Item>         
-              </List>
-            </Grid.Column>
-            <Grid.Column width={3}>
-              <Header inverted as="h4" content="Services" />
-              <List link inverted>
-                <List.Item as="">Trevor</List.Item>
-                <List.Item as="">Sepideh</List.Item>
-                <List.Item as="">Mohammad</List.Item>
-                <List.Item as="">Badri</List.Item>
-                <List.Item as="">Jonnathan</List.Item>
-                
-               
-              </List>
-            </Grid.Column>
-          </Grid.Row>
-        </Grid>
-      </Container>
-    </Segment>
-  </ResponsiveContainer>
-);
+class HomepageLayout extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      message: ''
+    };
+  }
+
+  handleChange = event => {
+    const { name, value } = event.target;
+    this.setState({
+      [name]: value
+    });
+  };
+
+  render() {
+    console.log(this.state);
+    return (
+      <ResponsiveContainer>
+        <Segment style={{ padding: '8em 0em' }} vertical>
+          <Grid container stackable verticalAlign="middle">
+            <Grid.Row>
+              <Grid.Column floated="right">
+                <Form>
+                  <TextArea
+                    autoHeight
+                    placeholder="Try adding multiple lines"
+                    style={{ minHeight: 100 }}
+                    name="message"
+                    onChange={this.handleChange}
+                    value={this.state.message}
+                  />
+                </Form>
+              </Grid.Column>
+            </Grid.Row>
+            <Grid.Row>
+              <Grid.Column textAlign="center">
+                <Button size="huge">Submit</Button>
+              </Grid.Column>
+            </Grid.Row>
+          </Grid>
+        </Segment>
+
+        <Segment inverted vertical style={{ padding: '5em 0em' }}>
+          <Container>
+            <Grid divided inverted stackable>
+              <Grid.Row>
+                <Grid.Column width={3}>
+                  <Header inverted as="h4" content="About" />
+                  <List link inverted>
+                    <List.Item>
+                      <a href="https://www.childrenscancernetwork.org/" target="_blank">
+                        Website
+                      </a>
+                    </List.Item>
+                    <List.Item>
+                      <a href="https://www.salesforce.com/" target="_blank">
+                        Salesforce
+                      </a>
+                    </List.Item>
+                    <List.Item>
+                      <a
+                        href="https://github.com/2018-Arizona-Opportunity-Hack/Team9"
+                        target="_blank"
+                      >
+                        Work Source
+                      </a>
+                    </List.Item>
+                  </List>
+                </Grid.Column>
+                <Grid.Column width={3}>
+                  <Header inverted as="h4" content="Services" />
+                  <List link inverted>
+                    <List.Item as="">Trevor</List.Item>
+                    <List.Item as="">Sepideh</List.Item>
+                    <List.Item as="">Mohammad</List.Item>
+                    <List.Item as="">Badri</List.Item>
+                    <List.Item as="">Jonnathan</List.Item>
+                  </List>
+                </Grid.Column>
+              </Grid.Row>
+            </Grid>
+          </Container>
+        </Segment>
+      </ResponsiveContainer>
+    );
+  }
+}
 export default HomepageLayout;
