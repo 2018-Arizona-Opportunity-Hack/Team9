@@ -5,25 +5,30 @@ import axios from 'axios';
 
 class LoginForm extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       username: '',
-      password: '',
-      
-    }
+      password: ''
+    };
     this.handleClick = this.handleClick.bind(this);
     this.handleChange = this.handleChange.bind(this);
-   
-  } 
-
-  handleClick(){
-    axios.post(`/authenticate/admin`, { firstname: "", password: "" })
-    .then(function(response){
-      console.log('saved successfully')
-    });  
   }
 
-  handleChange (event){
+  handleClick() {
+    axios
+      .post(`/authenticate/admin`, {
+        username: this.state.username,
+        password: this.state.password
+      })
+      .then(function(response) {
+        console.log(response);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
+
+  handleChange(event) {
     const { name, value } = event.target;
     this.setState({
       [name]: value
@@ -31,7 +36,7 @@ class LoginForm extends React.Component {
   }
 
   render() {
-    console.log(this.state)
+    console.log(this.state);
 
     return (
       <div className="login-form">
@@ -49,24 +54,28 @@ class LoginForm extends React.Component {
             </Header>
             <Form size="large">
               <Segment stacked>
-                <Form.Input 
-                  fluid 
-                  icon="user" 
-                  iconPosition="left" 
+                <Form.Input
+                  fluid
+                  icon="user"
+                  iconPosition="left"
                   placeholder="E-mail address"
-                  type="text"  
-                  name="username" value={this.state.username} onChange={this.handleChange} 
-                  />
+                  type="text"
+                  name="username"
+                  value={this.state.username}
+                  onChange={this.handleChange}
+                />
                 <Form.Input
                   fluid
                   icon="lock"
                   iconPosition="left"
                   placeholder="Password"
                   type="password"
-                  name="password" value={this.state.password} onChange={this.handleChange} 
+                  name="password"
+                  value={this.state.password}
+                  onChange={this.handleChange}
                 />
 
-                <Button color="teal" fluid size="large" onClick={(e) => this.handleClick(e)}>
+                <Button color="teal" fluid size="large" onClick={e => this.handleClick(e)}>
                   Login
                 </Button>
               </Segment>
