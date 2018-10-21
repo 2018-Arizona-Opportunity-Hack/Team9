@@ -19,32 +19,34 @@ namespace MessageService
         {
             TwilioClient.Init(accountSid, authToken);
             CSV file = new CSV(csvPath, text);
-
+            query q = new query();
+            List<Messages> messagesTosend = new List<Messages>();
             foreach(Person user in file.getUsers())
             {
-                var message = MessageResource.Create(
+                MessageResource message = MessageResource.Create(
                     body: file.getText(),
                     from: new Twilio.Types.PhoneNumber(myPhoneNumber),
                     to: new Twilio.Types.PhoneNumber(user.PhoneNumber)
                     );
-            }           
+
+                messagesTosend.Add(new Messages(message.DateSent.ToString(), message.Body, message.To, message.Sid, message.Body));
+            }
+
+            q.Update(messagesTosend);            
         }
 
         public void RetrieveMessages(string exportPath, string dateFrom, string dateTo)
         {
             TwilioClient.Init(accountSid, authToken);
             List<Messages> messages = new List<Messages>();
-            List<string> accountSids = new List<string>()
-            {
-                "SM523324975a54102683f302dabbaee5dc",
-                "SMf78d7c362f5384ac47c58a6a4719790c",
-                "SM64b2cf441e2a9597696408557d408e17"
-            };
+            query q = new query();
+            List<string> accountSids = q.Retrieve();
 
             foreach (string id in accountSids)
             {
                 MessageResource resource = MessageResource.Fetch(new FetchMessageOptions(id));
-                messages.Add(new Messages(resource.DateSent.ToString(), resource.Body, resource.From.ToString()));
+                messages.Add(new Messages(resource.DateSent.ToString(), resource.Body, resource.From.ToString(), resource.Sid,
+                    resource.Body));
             }
 
             CSV.exportCSV(exportPath, messages);
@@ -135,12 +137,15 @@ namespace MessageService
         public string TextMessage { get; private set; }
         public string FormattedName { get; private set; }
         public string PhoneNumber { get; private set; }
-
-        public Messages(string date, string TextMessage, string phoneNumber)
+        public string MessageSID { get; private set; }
+        public string MessageBody { get; set; }
+        public Messages(string date, string TextMessage, string phoneNumber, string messageSID, string messageBody)
         {
             this.Date = date;
             this.TextMessage = TextMessage;
-            this.PhoneNumber = PhoneNumber;
+            this.PhoneNumber = phoneNumber.Insert(5,"-").Insert(9,"-");
+            this.MessageSID = messageSID;
+            this.MessageBody = messageBody;
         }
     }
 }
