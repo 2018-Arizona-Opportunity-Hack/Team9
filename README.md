@@ -21,6 +21,7 @@ This project is a messaging tool that will allow the admin to communicate with a
 ```
  yarn start
 ```
+That will start the http://localhost:3000
 
 ## Tools used:
 1 - NodeJs for server development.
