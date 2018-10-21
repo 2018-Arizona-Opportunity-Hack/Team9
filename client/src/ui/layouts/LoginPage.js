@@ -1,8 +1,6 @@
 import React from 'react';
 import { Button, Form, Grid, Header, Image, Message, Segment } from 'semantic-ui-react';
 
-import CRUD from '../../utils/api/CRUD';
-
 class LoginForm extends React.Component {
   state = {
     username: '',

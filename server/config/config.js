@@ -1,23 +1,24 @@
-'use stricts'
-module.exports = {
-
-    // jwt_secret: "team9",
-    // port: process.env.PORT || 3000,
-    // base_url: process.env.BASE_URL || 'http://localhost:3000',
-    SALT_WORK_FACTOR : 10,
-    saltRounds = 10,
-
-    // myPlaintextPassword = 's0/\/\P4$$w0rD',
-    // someOtherPlaintextPassword = 'not_bacon',
-
-    // db : {
-    //   url:'mongodb://localhost:27017/maknin',
-    // }
-
-    // connection: {
-    //     host     : 'localhost',
-    //     user     : '< MySQL username >',
-    //     password : '< MySQL password >',
-    //     database : '<your database name>'
-    // }
+const mysql = require('mysql');
+let connection;
+// connects to heroku or to a local db
+if (process.env.JAWSDB_URL) {
+  connection = mysql.createConnection(process.env.JAWSDB_URL);
+} else {
+  connection = mysql.createConnection({
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASS,
+    database: process.env.DB_DATABASE
+  });
 }
+
+connection.connect(function(err) {
+  if (err) {
+    console.error('error connecting: ' + err.stack);
+    return;
+  }
+
+  console.log('connected as id ' + connection.threadId);
+});
+
+module.exports = connection;
