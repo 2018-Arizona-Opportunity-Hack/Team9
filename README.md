@@ -33,4 +33,4 @@ That will start the http://localhost:3000
 4 - Twillio for sms services.
 
 ## Database ER Diagrm:
-![Alt text](/Documentation/Database ERD.png?raw=true "Optional Title")
+![Alt text](Team9/Documentation/Database ERD.png?raw=true "Optional Title")
