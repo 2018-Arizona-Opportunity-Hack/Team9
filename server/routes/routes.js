@@ -18,6 +18,7 @@ router.post('/create/admin', (req, res, next) => {
 });
 
 router.post('/authenticate/admin', (req, res, next) => {
+  console.log(('BODY', req.body));
   userController.getUserByEmail(req.body, function(err, result) {
     if (err) throw err;
     jwt.sign({ username: req.body.username }, process.env.TOKEN_KEY, { expiresIn: '1d' }, function(
