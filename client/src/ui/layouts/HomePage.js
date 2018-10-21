@@ -3,11 +3,9 @@ import React, { Component } from 'react';
 import {
   Button,
   Container,
-  Divider,
   Grid,
   Header,
   Icon,
-  Image,
   List,
   Menu,
   Responsive,
@@ -19,19 +17,12 @@ import {
 } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import MyComponent from '../components/MyComponent';
+import axios from 'axios';
+
 
 class HomepageHeading extends Component {
-  state = { selectedFile: null };
-
-  uploadFile = event => {
-    this.setState({
-      selectedFile: event.target.files[0]
-    });
-  };
-
   render() {
-    const { mobile } = this.props;
-    console.log(this.state);
+    const { mobile, fileUpload } = this.props;
     return (
       <Container text>
         <Header
@@ -55,6 +46,7 @@ class HomepageHeading extends Component {
             marginTop: mobile ? '0.5em' : '1.5em'
           }}
         />
+
         <Button animated="fade">
           <Button.Content visible>Please Upload Your File Here</Button.Content>
           <Button.Content hidden>
@@ -127,7 +119,7 @@ class DesktopContainer extends Component {
                 </Menu.Item>
               </Container>
             </Menu>
-            <HomepageHeading />
+            <HomepageHeading fileUpload={this.props.fileUpload} />
           </Segment>
         </Visibility>
 
@@ -180,11 +172,7 @@ class MobileContainer extends Component {
                   <Menu.Item onClick={this.handleToggle}>
                     <Icon name="sidebar" />
                   </Menu.Item>
-                  <Menu.Item position="right">
-                    {/* <Button as="a" inverted style={{ marginLeft: '0.5em' }}>
-                      Log Out
-                    </Button> */}
-                  </Menu.Item>
+                  <Menu.Item position="right" />
                 </Menu>
               </Container>
               <HomepageHeading mobile />
@@ -202,14 +190,16 @@ MobileContainer.propTypes = {
   children: PropTypes.node
 };
 
-const ResponsiveContainer = ({ children, ...props }) => {
+
+const ResponsiveContainer = ({ children, fileUpload }) => {
   return (
     <div>
-      <DesktopContainer {...props}>{children}</DesktopContainer>
-      <MobileContainer>{children}</MobileContainer>
+      <DesktopContainer fileUpload={fileUpload}>{children}</DesktopContainer>
+      <MobileContainer fileUpload={fileUpload}>{children}</MobileContainer>
     </div>
   );
 };
+
 
 ResponsiveContainer.propTypes = {
   children: PropTypes.node
@@ -219,9 +209,18 @@ class HomepageLayout extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      message: ''
+      message: '',
+      selectedFile: null,
+      error: false
     };
   }
+
+  uploadFile = event => {
+    console.log('event', event);
+    this.setState({
+      selectedFile: event.target.files[0]
+    });
+  };
 
   handleChange = event => {
     const { name, value } = event.target;
@@ -230,11 +229,30 @@ class HomepageLayout extends Component {
     });
   };
 
+  submitData = () => {
+    if (!this.state.message || !this.state.selectedFile) {
+      this.setState({ error: 'Message and file are both required' });
+      return;
+    }
+    const formData = new FormData();
+    formData.append('file', new Blob([this.state.selectedFile]));
+    console.log(formData);
+    axios
+      .post('/send/message', formData)
+      .then(res => {
+        console.log(res);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+
   render() {
     console.log(this.state);
     console.log(this.props);
     return (
-      <ResponsiveContainer {...this.props}>
+
+      <ResponsiveContainer fileUpload={this.uploadFile}>
         <Segment style={{ padding: '8em 0em' }} vertical>
           <Grid container stackable verticalAlign="middle">
             <Grid.Row>
@@ -256,7 +274,10 @@ class HomepageLayout extends Component {
             </Grid.Row>
             <Grid.Row>
               <Grid.Column textAlign="center">
-                <Button size="huge">Submit</Button>
+                <Button size="huge" onClick={this.submitData}>
+                  Submit
+                </Button>
+                {this.state.error && <p style={{ color: 'red' }}>{this.state.error}</p>}
               </Grid.Column>
             </Grid.Row>
           </Grid>
@@ -307,4 +328,5 @@ class HomepageLayout extends Component {
     );
   }
 }
+
 export default HomepageLayout;

@@ -1,8 +1,12 @@
 'use strict';
-let express = require('express');
-let router = express.Router();
-let userController = require('../controllers/userController.js');
+const express = require('express');
+const router = express.Router();
+const userController = require('../controllers/userController.js');
 const jwt = require('jsonwebtoken');
+const client = require('twilio')(
+  'AC62da8324816413183f116e44edf29fb8',
+  'ab782b73f24fabd30c5d18ed1b6656d8'
+);
 
 router.post('/create/admin', (req, res, next) => {
   if (!req.body.password || !req.body.username) {
@@ -48,6 +52,30 @@ router.post('/authenticate/admin', (req, res, next) => {
       }
     });
   }
+});
+
+router.post('/send/message', (req, res, next) => {
+  let body = '';
+
+  req.on('data', chunk => {
+    body += chunk.toString();
+  });
+
+  req.on('end', () => {
+    // const split = body.split('\n');
+    // const slim = split.splice(5);
+    // const slice = slim.slice(0, slim.length - 3);
+
+    const contacts = ['9283152886', '6024814816', '4806166117', '7204162518', '5189616102'];
+
+    contacts.forEach(contact => {
+      client.messages.create({
+        body: 'Hello World',
+        from: '+14809990463',
+        to: contact
+      });
+    });
+  });
 });
 
 module.exports = router;
