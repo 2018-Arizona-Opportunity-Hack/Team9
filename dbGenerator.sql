@@ -91,3 +91,10 @@ INSERT INTO RESPONSES(CONTACT_ID, TEXTBODY, E_DTAE) VALUES('elbash@gmail.com', '
 INSERT INTO RESPONSES(CONTACT_ID, TEXTBODY, E_DTAE) VALUES('elbash@gmail.com', 'Can you come to the hospital Friday 3/11/2018 at 1:00pm? RSVP at http://forms.google.com/form2344', '2017-6-7');
 INSERT INTO RESPONSES(CONTACT_ID, TEXTBODY, E_DTAE) VALUES('rezavrfan@hotmail.com', 'Would you like to schedule appointment for next week? RSVP at http://forms.google.com/form2344', '2015-11-11');
 INSERT INTO RESPONSES(CONTACT_ID, TEXTBODY, E_DTAE) VALUES('rezavrfan@hotmail.com', 'Would you like to schedule appointment for next week? RSVP at http://forms.google.com/form2344', '2016-3-8');
+
+-- Getting a specific group
+SELECT A.NAME, A.PHONE 
+FROM CONTACTS A
+JOIN GROUPCOLLECTION B ON A.EMAIL = B.CONTACT_ID
+JOIN GROUPSCATEGORY C ON B.GROUP_ID = C.ID
+WHERE C.NAME = 'Young Adults';
