@@ -5,8 +5,8 @@ import HomePage from './ui/layouts/HomePage';
 
 class App extends Component {
   render() {
-    return <HomePage/>
-    // <LoginPage/>;
+    return     <LoginPage/>;
+    // <HomePage/>
   }
 }
 

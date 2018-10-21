@@ -10,6 +10,8 @@
 # production
 /build
 
+/.env
+
 # misc
 .DS_Store
 .env.local
@@ -23,3 +25,5 @@ yarn-error.log*
 
 # local files
 .idea/
+.env
+yarn.lock
