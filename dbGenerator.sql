@@ -109,4 +109,32 @@ INSERT INTO RESPONSES(CONTACT_ID, TEXTBODY, E_DTAE) VALUES('elbash@gmail.com', '
 INSERT INTO RESPONSES(CONTACT_ID, TEXTBODY, E_DTAE) VALUES('rezavrfan@hotmail.com', 'Would you like to schedule appointment for next week? RSVP at http://forms.google.com/form2344', '2015-11-11');
 INSERT INTO RESPONSES(CONTACT_ID, TEXTBODY, E_DTAE) VALUES('rezavrfan@hotmail.com', 'Would you like to schedule appointment for next week? RSVP at http://forms.google.com/form2344', '2016-3-8');
 
+UPDATE RESPONSES SET MSG_ID = 'Dkjdfn34HB798', EVENT = 'Children Hospital Event'
+WHERE ID = 1;
 
+UPDATE RESPONSES SET MSG_ID = 'Dkj76543234HB798', EVENT = 'Children Hospital Event'
+WHERE ID = 2;
+
+UPDATE RESPONSES SET MSG_ID = 'SFDGJK43234HB798', EVENT = 'Breast Cancer Event'
+WHERE ID = 3;
+
+UPDATE RESPONSES SET MSG_ID = 'gfhGGkae32455sd', EVENT = 'Breast Cancer Event'
+WHERE ID = 4;
+
+UPDATE RESPONSES SET MSG_ID = 'jghjkl48953dfgd8', EVENT = 'Breast Cancer Event'
+WHERE ID = 5;
+
+UPDATE RESPONSES SET MSG_ID = 'Bash2347835sdfjg', EVENT = 'Breast Cancer Event'
+WHERE ID = 6;
+
+UPDATE RESPONSES SET MSG_ID = 'Dkdjf494394HB798', EVENT = 'Children Hospital Event'
+WHERE ID = 7;
+
+UPDATE RESPONSES SET MSG_ID = 'FFGDkkdgg34HB798', EVENT = 'Children Hospital Event'
+WHERE ID = 8;
+
+UPDATE RESPONSES SET MSG_ID = 'sldkfmn843758FFS', EVENT = 'Breast Cancer Event'
+WHERE ID = 9;
+
+UPDATE RESPONSES SET MSG_ID = 'FOOadh23874583ks', EVENT = 'Breast Cancer Event'
+WHERE ID = 10;
