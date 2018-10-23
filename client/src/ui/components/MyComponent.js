@@ -18,7 +18,7 @@ const content = [
     animation: 'fade'
   },
   {
-    text: 'Click send.',
+    text: 'Click Submit.',
     className: 'classD',
     animation: 'fade'
   }
