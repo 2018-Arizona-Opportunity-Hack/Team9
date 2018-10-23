@@ -256,7 +256,9 @@ class HomepageLayout extends Component {
         <Segment style={{ padding: '8em 0em' }} vertical>
           <Grid container stackable verticalAlign="middle">
             <Grid.Row>
-              <MyComponent />
+              <Grid.Column textAlign="center">
+                <MyComponent />
+              </Grid.Column>
             </Grid.Row>
             <Grid.Row>
               <Grid.Column floated="right">
